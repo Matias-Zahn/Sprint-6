@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/User/Desktop/Proyectos ZZ/Curso itba/Sprint 6/sprint6.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2787"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="cliente" custom_title="0" dock_id="1" table="4,7:maincliente"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000011e00ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="2da PRO*">--Tercera Problematica
+
+--#1
+SELECT *
+FROM cuenta
+where balance &lt; 0;
+
+--#2
+SELECT nombre, Apellido, edad 
+FROM vista_clientes 
+WHERE Apellido like(&quot;%Z%&quot;);
+
+--#3
+SELECT 
+    vc.nombre, 
+    vc.apellido, 
+    vc.edad,
+    s.branch_name as &quot;Nombre de Sucursal&quot;
+FROM 
+    vista_clientes vc
+JOIN 
+    sucursal s ON vc.sucursal = s.branch_id
+WHERE 
+    vc.nombre = 'Brendan'
+ORDER BY 
+    s.branch_name;
+
+--#4
+
+SELECT loan_total FROM prestamo WHERE loan_total/100 &gt; 80000 
+UNION SELECT loan_type FROM prestamo WHERE loan_type LIKE &quot;prendario&quot;;
+
+--#5
+
+SELECT * FROM prestamo WHERE loan_total &gt; (SELECT avg(loan_total) FROM prestamo);
+
+--#6
+SELECT COUNT(nombre) as &quot;Total de menores a 50&quot;
+FROM vista_clientes
+WHERE EDAD &lt; 50;
+
+
+--#7
+
+SELECT * FROM cuenta WHERE balance &gt; 8000 LIMIT 5;
+
+--#8
+
+SELECT * FROM prestamo WHERE (strftime('%m', loan_date)) IN (&quot;04&quot;, &quot;06&quot;, &quot;08&quot;)
+ORDER BY loan_total;
+
+--#9
+
+SELECT loan_type, sum(loan_total) AS loan_total_accu FROM prestamo 
+GROUP BY loan_type;
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
