@@ -1,84 +1,167 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/User/Desktop/Proyectos ZZ/Curso itba/Sprint 6/sprint6.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2787"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="cliente" custom_title="0" dock_id="1" table="4,7:maincliente"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000011e00ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="1RA PRO">--PRIMERA PROBLEMATICA
-
-CREATE TABLE tipo_cuenta(
-id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-nombre TEXT NOT NULL
-);
-
-INSERT INTO tipo_cuenta (account_type_description)
-VALUES
-  (&quot;Caja de ahorro en Pesos&quot;),
-  (&quot;Cuenta corriente en Pesos&quot;);
-
-CREATE TABLE tipo_cliente (
-	id integer not null PRIMARY KEY AUTOINCREMENT,
-	nombre text not null	
-);
-
-INSERT INTO tipo_cliente (customer_type_description)
-VALUES
-  (&quot;Classic&quot;),
-  (&quot;Gold&quot;),
-  (&quot;Black&quot;);
-  
-  
- CREATE TABLE marca_tarjeta(
-    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
-);
-  
-
- CREATE TABLE tarjeta(
-	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	numero TEXT NOT NULL CHECK( length(numero) &lt;=20 ),
-	cvv INTEGER NOT NULL,
-	fecha_otorgamiento DATE NOT NULL,
-	fecha_expiracion DATE NOT NULL,
-	tipo TEXT NOT NULL CHECK(card_type='débito' OR card_type='crédito'),
-	cliente_id INTEGER NOT NULL,
-	marca_tarjeta_id INTEGER NOT NULL,
-	FOREIGN KEY (cliente_id) REFERENCES cliente(customer_id),
-	FOREIGN KEY (marca_tarjeta_id) REFERENCES marca_tarjeta(id)
-);
-
-
-INSERT INTO tarjeta (numero,cvv,fecha_otorgamiento,card_expire_date,card_cvv,card_type,customer_id)
-VALUES  -- EJEMPLOS 
-	  (&quot;4485718343564426&quot;,&quot;325&quot;,&quot;01/29/2025&quot;,&quot;12/06/2021&quot;,&quot;Debito&quot;,1,283),
-	  (&quot;429342 7365257453&quot;,&quot;634&quot;,&quot;08/21/2025&quot;,&quot;05/08/2024&quot;,&quot;Credito&quot;,1,210),
-	  (&quot;4916 994 35 2659&quot;,&quot;249&quot;,&quot;04/10/2024&quot;,&quot;06/24/2022&quot;,&quot;Credito&quot;,2,23),
-	  (&quot;543882 7859593433&quot;,&quot;558&quot;,&quot;06/11/2025&quot;,&quot;01/05/2023&quot;,&quot;Credito&quot;,1,166),
-	  (&quot;527427 282188 3785&quot;,&quot;277&quot;,&quot;06/07/2025&quot;,&quot;01/02/2022&quot;,&quot;Credito&quot;,2,466);
-	  
-
-CREATE TABLE direccion (
-id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-calle TEXT NOT NULL,
-ciudad TEXT NOT NULL,
-codigo_postal TEXT NOT NULL,
-tipo_entidad TEXT NOT NULL,
-entidad_id TEXT NOT NULL
-);
-
-INSERT INTO direccion (calle,calle,ciudad,ciudad,codigo_postal,tipo_entidad, entidad_id)
-VALUES --EJEMPLOS
-	(&quot;Ap #310-6352 Aliquam Rd.&quot;, &quot;Paulista&quot;, &quot;24686&quot;, &quot;cliente&quot;, 343),
-	(&quot;142-1105 Aliquam St.&quot;, &quot;Municipal District&quot;, &quot;6209-5885&quot;, &quot;cliente&quot;, 181);
-	  
-	  
---EJEMPLOS
-UPDATE `cuenta` SET `tipo_cuenta_id` = 1 WHERE `account_id` = 2;
-UPDATE `cuenta` SET `tipo_cuenta_id` = 2 WHERE `account_id` = 3;
-UPDATE `cuenta` SET `tipo_cuenta_id` = 2 WHERE `account_id` = 4;
-UPDATE `cuenta` SET `tipo_cuenta_id` = 2 WHERE `account_id` = 5;
-UPDATE `cuenta` SET `tipo_cuenta_id` = 2 WHERE `account_id` = 6;
-UPDATE `cuenta` SET `tipo_cuenta_id` = 2 WHERE `account_id` = 7;
-UPDATE `cuenta` SET `tipo_cuenta_id` = 1 WHERE `account_id` = 8;
-
-
-
-
-
-UPDATE empleado
-SET employee_hire_date = (substr(employee_hire_date, 7, 4) || '-' || substr(employee_hire_date, 4, 2) || '-' || substr(employee_hire_date, 1, 2)) 
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/User/Desktop/Proyectos ZZ/Curso itba/Sprint 6/sprint6.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2787"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="cliente" custom_title="0" dock_id="1" table="4,7:maincliente"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000011e00ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="1RA PRO">--PRIMERA PROBLEMATICA
+
+
+
+CREATE TABLE tipo_cuenta(
+
+id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+
+nombre TEXT NOT NULL
+
+);
+
+
+
+INSERT INTO tipo_cuenta (account_type_description)
+
+VALUES
+
+  (&quot;Ahorro&quot;),
+
+  (&quot;Corriente&quot;);
+
+
+
+CREATE TABLE tipo_cliente (
+
+	id integer not null PRIMARY KEY AUTOINCREMENT,
+
+	nombre text not null	
+
+);
+
+
+
+INSERT INTO tipo_cliente (customer_type_description)
+
+VALUES
+
+  (&quot;Classic&quot;),
+
+  (&quot;Gold&quot;),
+
+  (&quot;Black&quot;);
+
+  
+
+  
+
+ CREATE TABLE marca_tarjeta(
+
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+
+    nombre TEXT NOT NULL,
+
+);
+
+  
+
+
+
+ CREATE TABLE tarjeta(
+
+	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+
+	numero TEXT NOT NULL CHECK( length(numero) &lt;=20 ),
+
+	cvv INTEGER NOT NULL,
+
+	fecha_otorgamiento DATE NOT NULL,
+
+	fecha_expiracion DATE NOT NULL,
+
+	tipo TEXT NOT NULL CHECK(card_type='débito' OR card_type='crédito'),
+
+	cliente_id INTEGER NOT NULL,
+
+	marca_tarjeta_id INTEGER NOT NULL,
+
+	FOREIGN KEY (cliente_id) REFERENCES cliente(customer_id),
+
+	FOREIGN KEY (marca_tarjeta_id) REFERENCES marca_tarjeta(id)
+
+);
+
+
+
+
+
+INSERT INTO tarjeta (numero,cvv,fecha_otorgamiento,card_expire_date,card_cvv,card_type,customer_id)
+
+VALUES  -- EJEMPLOS 
+
+	  (&quot;4485718343564426&quot;,&quot;325&quot;,&quot;01/29/2025&quot;,&quot;12/06/2021&quot;,&quot;Debito&quot;,1,283),
+
+	  (&quot;429342 7365257453&quot;,&quot;634&quot;,&quot;08/21/2025&quot;,&quot;05/08/2024&quot;,&quot;Credito&quot;,1,210),
+
+	  (&quot;4916 994 35 2659&quot;,&quot;249&quot;,&quot;04/10/2024&quot;,&quot;06/24/2022&quot;,&quot;Credito&quot;,2,23),
+
+	  (&quot;543882 7859593433&quot;,&quot;558&quot;,&quot;06/11/2025&quot;,&quot;01/05/2023&quot;,&quot;Credito&quot;,1,166),
+
+	  (&quot;527427 282188 3785&quot;,&quot;277&quot;,&quot;06/07/2025&quot;,&quot;01/02/2022&quot;,&quot;Credito&quot;,2,466);
+
+	  
+
+
+
+CREATE TABLE direccion (
+
+id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+
+calle TEXT NOT NULL,
+
+ciudad TEXT NOT NULL,
+
+codigo_postal TEXT NOT NULL,
+
+tipo_entidad TEXT NOT NULL,
+
+entidad_id TEXT NOT NULL
+
+);
+
+
+
+INSERT INTO direccion (calle,calle,ciudad,ciudad,codigo_postal,tipo_entidad, entidad_id)
+
+VALUES --EJEMPLOS
+
+	(&quot;Ap #310-6352 Aliquam Rd.&quot;, &quot;Paulista&quot;, &quot;24686&quot;, &quot;cliente&quot;, 343),
+
+	(&quot;142-1105 Aliquam St.&quot;, &quot;Municipal District&quot;, &quot;6209-5885&quot;, &quot;cliente&quot;, 181);
+
+	  
+
+	  
+
+--EJEMPLOS
+
+UPDATE `cuenta` SET `tipo_cuenta_id` = 1 WHERE `account_id` = 2;
+
+UPDATE `cuenta` SET `tipo_cuenta_id` = 2 WHERE `account_id` = 3;
+
+UPDATE `cuenta` SET `tipo_cuenta_id` = 2 WHERE `account_id` = 4;
+
+UPDATE `cuenta` SET `tipo_cuenta_id` = 2 WHERE `account_id` = 5;
+
+UPDATE `cuenta` SET `tipo_cuenta_id` = 2 WHERE `account_id` = 6;
+
+UPDATE `cuenta` SET `tipo_cuenta_id` = 2 WHERE `account_id` = 7;
+
+UPDATE `cuenta` SET `tipo_cuenta_id` = 1 WHERE `account_id` = 8;
+
+
+
+
+
+
+
+
+
+
+
+UPDATE empleado
+
+SET employee_hire_date = (substr(employee_hire_date, 7, 4) || '-' || substr(employee_hire_date, 4, 2) || '-' || substr(employee_hire_date, 1, 2)) 
+
 WHERE employee_hire_date &lt;&gt; '';</sql><current_tab id="0"/></tab_sql></sqlb_project>
